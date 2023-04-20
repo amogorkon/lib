@@ -69,3 +69,13 @@ def pipes(func_or_class):
     code = compile(tree, filename=(ctx["__file__"] if "__file__" in ctx else "repl"), mode="exec")
     exec(code, ctx)
     return ctx[tree.body[0].name]
+
+def piped_print(iterator_of_things, enumerated=True):
+    if enumerated:
+        for i, thing in enumerate(iterator_of_things):
+            print(f"{i}: {thing}")
+            yield thing
+    else:
+        for thing in iterator_of_things:
+            print(thing)
+            yield thing
